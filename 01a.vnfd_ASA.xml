@@ -1,0 +1,99 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <nfvo xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo">
+  <vnfd>
+    <id>ASA-VNFD</id>
+    <provider>Cisco</provider>
+    <version>1.0</version>
+    <product-info-description>Virtual Security Appliance</product-info-description>
+    <vdu>
+      <id>ASA</id>
+      <description>vBranch ASA</description>
+      <internal-connection-point-descriptor>
+        <id>mgmt</id>
+        <external-connection-point-descriptor>mgmt</external-connection-point-descriptor>
+        <layer-protocol>IPv4</layer-protocol>
+        <interface-id xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">0</interface-id>
+      </internal-connection-point-descriptor>
+      <virtual-compute-descriptor>ASA-virtual-compute</virtual-compute-descriptor>
+      <virtual-storage-descriptor>ASA-virtual-storage</virtual-storage-descriptor>
+      <software-image-descriptor>
+        <version></version>
+        <checksum></checksum>
+        <container-format>bare</container-format>
+        <disk-format>qcow2</disk-format>
+        <image>http://10.81.125.72/asav961.4nic.tar.gz</image>
+        <image-name xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">ASAImage</image-name>
+        <additional-setting xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">
+          <id>disk_bus</id>
+          <value>virtio</value>
+        </additional-setting>
+        <additional-setting xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">
+          <id>e1000_net</id>
+          <value>false</value>
+        </additional-setting>
+        <additional-setting xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">
+          <id>serial_console</id>
+          <value>true</value>
+        </additional-setting>
+        <additional-setting xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">
+          <id>virtio_net</id>
+          <value>true</value>
+        </additional-setting>
+      </software-image-descriptor>
+      <device-type xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">
+        <cli>
+          <ned-id>asa-id:cisco-asa</ned-id>
+          <protocol>ssh</protocol>
+        </cli>
+      </device-type>
+      <vnf-wait-time xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">45</vnf-wait-time>
+      <day0 xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis">
+        <destination>day0-config</destination>
+        <mandatory/>
+      </day0>
+    </vdu>
+    <virtual-compute-descriptor>
+      <id>ASA-virtual-compute</id>
+      <virtual-memory>
+        <virtual-memory-size>4.0</virtual-memory-size>
+      </virtual-memory>
+      <virtual-cpu>
+        <number-of-virtual-cpus>2</number-of-virtual-cpus>
+      </virtual-cpu>
+    </virtual-compute-descriptor>
+    <virtual-storage-descriptor>
+      <id>ASA-virtual-storage</id>
+      <type-of-storage>root</type-of-storage>
+      <size-of-storage>8</size-of-storage>
+    </virtual-storage-descriptor>
+    <virtual-link-descriptor>
+      <id>mgmt</id>
+      <connectivity-type>
+        <layer-protocol>IPv4</layer-protocol>
+      </connectivity-type>
+    </virtual-link-descriptor>
+    <external-connection-point-descriptor>
+      <id>mgmt</id>
+      <virtual-link-descriptor>mgmt</virtual-link-descriptor>
+      <layer-protocol>IPv4</layer-protocol>
+      <management xmlns="http://tail-f.com/pkg/tailf-etsi-rel2-nfvo-nfvis"/>
+    </external-connection-point-descriptor>
+    <deployment-flavor>
+      <id>ASA-VNFD</id>
+      <vdu-profile>
+        <vdu>ASA</vdu>
+        <min-number-of-instances>1</min-number-of-instances>
+        <max-number-of-instances>1</max-number-of-instances>
+      </vdu-profile>
+      <instantiation-level>
+        <id>ASA-VNFD</id>
+        <vdu-level>
+          <vdu>ASA</vdu>
+          <number-of-instances>1</number-of-instances>
+        </vdu-level>
+      </instantiation-level>
+      <default-instantiation-level>ASA-VNFD</default-instantiation-level>
+    </deployment-flavor>
+  </vnfd>
+  </nfvo>
+</config>

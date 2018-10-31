@@ -1,0 +1,11 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <provider-infrastructure xmlns="http://com/cisco/corefpcommon">
+    <provider>CiscoLive-Provider</provider>
+    <tenant-infrastructure>
+      <tenant>CiscoLive-Tenant</tenant>
+      <catalog xmlns="http://cisco.com/ns/branch-infra-common">CiscoLive</catalog>
+    </tenant-infrastructure>
+    <catalog xmlns="http://cisco.com/ns/branch-infra-common">CiscoLive</catalog>
+    <vmanage xmlns="http://com/cisco/nso/corefp/sdwan/vedge">vmanage-1</vmanage>
+  </provider-infrastructure>
+</config>

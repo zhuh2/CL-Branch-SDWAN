@@ -1,0 +1,53 @@
+ASA Version 9.6.1
+ssh version 2
+!
+crypto key generate rsa modulus 2048
+terminal width 511
+!
+interface management0/0
+ description int-mgmt-net
+ nameif ${MGMT_IF}
+ security-level 100
+ ip address ${NICID_0_IP_ADDRESS} ${NICID_0_NETMASK}
+ no shutdown
+!
+username ${USERNAME} password ${PASSWORD} privilege 15
+ssh 0.0.0.0 0.0.0.0 ${MGMT_IF}
+!
+aaa authentication ssh console LOCAL
+aaa authorization exec LOCAL
+!
+route ${MGMT_IF} 0.0.0.0 0.0.0.0 ${USER_NIC_ID0_GW} 1
+!
+enable password ${ENABLE_PASSWORD}
+hostname ${HOSTNAME}
+
+interface GigabitEthernet0/0
+ no shutdown
+ nameif Management
+ security-level 50
+ ip address 10.1.48.120 255.255.255.0
+!
+interface GigabitEthernet0/2
+ no shutdown
+ nameif Inside
+ security-level 100
+ ip address 100.10.2.1 255.255.255.0
+!
+interface GigabitEthernet0/1
+ no shutdown
+ nameif Outside
+ security-level 10
+ ip address 100.10.1.2 255.255.255.0
+!
+route Management 0.0.0.0 0.0.0.0 10.1.48.1
+route Outside 0.0.0.0 0.0.0.0 100.10.1.1
+ssh 0.0.0.0 0.0.0.0 Management
+object network Inside-Net
+ subnet 100.10.2.0 255.255.255.0
+access-list Inside extended permit ip any any 
+access-list Outside extended permit ip any any 
+object network Inside-Net
+ nat (Inside,Outside) dynamic interface
+access-group Inside in interface Inside
+access-group Outside in interface Outside

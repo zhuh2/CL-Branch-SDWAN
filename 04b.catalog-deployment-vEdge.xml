@@ -1,0 +1,29 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <catalog xmlns="http://cisco.com/ns/branch-infra-common">
+    <name>CiscoLive</name>
+      <deployment>
+        <name>vEdge-Dep</name>
+        <bootup-time>120</bootup-time>
+        <recovery-wait-time>0</recovery-wait-time>
+        <vnfd>
+          <name>vEdge-VNFD</name>
+          <vdu>
+            <name>vEdge-VDU</name>
+          </vdu>
+        </vnfd>
+        <polling-frequency>3</polling-frequency>
+        <vnf-port>22</vnf-port>
+        <port-start-range>22327</port-start-range>
+        <port-end-range>22327</port-end-range>
+        <intangible/>
+        <day0-url xmlns="http://cisco.com/ns/branchinfra-nfvo">
+          <dstFile>/openstack/latest/user_data</dstFile>
+          <url>http://10.81.125.72/day0/vedge_cloudinit.cfg</url>
+          <var>
+            <name>HOSTNAME</name>
+            <val>CL-vEdge</val>
+          </var>
+        </day0-url>
+      </deployment>
+  </catalog>
+</config>

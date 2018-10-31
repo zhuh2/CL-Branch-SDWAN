@@ -1,0 +1,36 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <ndus xmlns="http://com/cisco/nso/corefp/sdwan">
+    <name>ASA-ndu</name>
+    <network>
+      <name>LAN-1</name>
+      <pre-existing-network/>
+    </network>
+    <network>
+      <name>wan-net</name>
+      <pre-existing-network/>
+    </network>
+    <network>
+      <name>LAN-2</name>
+      <pre-existing-network/>
+    </network>
+    <network>
+      <name>int-mgmt-net</name>
+    </network>
+    <nic>
+      <id>1</id>
+      <network>wan-net</network>
+    </nic>
+    <nic>
+      <id>2</id>
+      <network>LAN-1</network>
+    </nic>
+    <nic>
+      <id>3</id>
+      <network>LAN-2</network>
+    </nic>
+    <nic>
+      <id>0</id>
+      <network>int-mgmt-net</network>
+    </nic>
+  </ndus>
+</config>
